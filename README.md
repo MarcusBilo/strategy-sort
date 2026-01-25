@@ -38,9 +38,7 @@ StrategySort is not the first algorithm to perform a prepass analysis on the inp
 - reverse descending runs,
 - determine the order of merges.
 
-In this sense, the idea of paying O(n) in advance is not unique in abstract terms.
-
-However, this is where the designs differ:
+In this sense, the idea of paying O(n) in advance is not unique. However, this is where the designs differ:
 
 Timsort
 - Always performs a merge-based stable sort
@@ -55,3 +53,5 @@ Instead of optimizing a single algorithm, StrategySort treats sorting as a probl
 # Implementation
 
 Non-recursive implementation (manual stack instead of recursion) using stack-allocated buffers + one stack-allocated buffer to increase merge performance.
+
+The implementations are inspired by Peters’ Pattern-Defeating Quicksort, Peters’ TimSort, Yaroslavskiy’s Dual-Pivot Quicksort, and Astrelin’s GrailSort, as well as other hybrid adaptive sorting techniques. Credit is also due to Igor van den Hoven for his Conjoined Triple Reversal rotation, which is used in the mergesort implementation.
