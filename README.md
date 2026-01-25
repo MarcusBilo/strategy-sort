@@ -54,4 +54,4 @@ Instead of optimizing a single algorithm, StrategySort treats sorting as a probl
 
 # Implementation
 
-Non-recursive implementation (manual stack instead of recursion) using a fixed total amount of [512]int stack-allocated buffers.
+Non-recursive implementation (manual stack instead of recursion) using stack-allocated buffers + one stack-allocated buffer to increase merge performance.
