@@ -55,3 +55,7 @@ Instead of optimizing a single algorithm, StrategySort treats sorting as a probl
 Non-recursive implementation (manual stack instead of recursion) using stack-allocated buffers + one stack-allocated buffer to increase merge performance.
 
 The implementations are inspired by Peters’ Pattern-Defeating Quicksort, Peters’ TimSort, Yaroslavskiy’s Dual-Pivot Quicksort, and Astrelin’s GrailSort, as well as other hybrid adaptive sorting techniques. Credit is also due to Igor van den Hoven for his Conjoined Triple Reversal rotation, which is used in the mergesort implementation.
+
+# Memory
+
+If in-place means that memory consumption does not scale with input size n, then StrategySort satisfies this definition. This is because it uses a fixed [512]int buffer for the quicksort stack, which corresponds to either 2048 B (32-bit) or 4096 B (64-bit), depending on the system architecture. The Mergesort implementation uses a fixed [192]int stack buffer (768 B or 1536 B) together with a [320]T buffer to speed up merging. The size of this generic buffer depends on T and ranges from 320 B (for int8, uint8) to 5120 B (for strings). While it would be possible to further reduce memory usage without sacrificing performance or functionality, this was not a primary design goal.
