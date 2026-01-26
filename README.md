@@ -10,8 +10,6 @@ Instead of relying on a single algorithm that works quite well in many scenarios
 
 At first glance, this may seem counterproductive. Most sorting algorithms deliberately avoid additional passes over the data unless absolutely necessary. However, StrategySort shows that this assumption is not always true: an explicit presort analysis phase can still lead to competitive, and in some cases, even superior performance.
 
-More complex/complicated algorithms, such as [crumsort](https://github.com/scandum/crumsort), reinforce this idea. Although they perform substantial upfront analysis, that additional work can significantly improve the efficiency of the subsequent sorting.
-
 # Performance
 Benchmarks were run on an Intel i5-9600K.
 
@@ -48,7 +46,7 @@ Instead of optimizing a single algorithm, StrategySort treats sorting as a probl
 
 Non-recursive implementation (manual stack instead of recursion) using stack-allocated buffers + one stack-allocated buffer to increase merge performance.
 
-The implementations are inspired by Peters’ Pattern-Defeating Quicksort, Peters’ Timsort, Yaroslavskiy’s Dual-Pivot Quicksort, and Astrelin’s GrailSort, as well as other hybrid adaptive sorting techniques. Credit is also due to Igor van den Hoven for his Conjoined Triple Reversal rotation, which is used in the mergesort implementation.
+The implementations are inspired by Peters’ Pattern-Defeating Quicksort, Peters’ Timsort, Yaroslavskiy’s Dual-Pivot Quicksort, and Astrelin’s GrailSort, as well as other hybrid adaptive sorting techniques.
 
 # Memory
 
