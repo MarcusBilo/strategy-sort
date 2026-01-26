@@ -2,13 +2,15 @@
 StrategySort is an unstable adaptive hybrid sorting algorithm that treats sorting as a strategy selection problem, dynamically choosing the most appropriate approach at runtime.
 
 # Rationale
-The (unstable) sorting algorithm in Go's standard library is primarily a pattern-defeating quicksort (pdqsort). It is fast and works well for a wide variety of inputs without requiring any prior knowledge about the data. This general, data-independent approach is also typical of most high-performance sorting algorithms.
+The (unstable) sorting algorithm in Go's standard library is primarily a pattern-defeating quicksort (pdqsort). It is fast and works well for a wide variety of inputs without requiring any prior knowledge about the data. This general, data-independent approach is typical for general-purpose sorting algorithms.
 
 StrategySort takes a different approach.
 
 Instead of relying on a single algorithm that works quite well in many scenarios, StrategySort performs an initial analysis of the input to extract information about the data. This information is then used to select the most appropriate sorting strategy between customized variants of mergesort and quicksort.
 
-At first glance, this may seem counterproductive. Most high-performance sorting algorithms deliberately avoid additional passes over the data unless absolutely necessary. However, StrategySort shows that this assumption is not always true: an explicit presort analysis phase can still lead to competitive, and in some cases, even superior performance.
+At first glance, this may seem counterproductive. Most sorting algorithms deliberately avoid additional passes over the data unless absolutely necessary. However, StrategySort shows that this assumption is not always true: an explicit presort analysis phase can still lead to competitive, and in some cases, even superior performance.
+
+More complex/complicated algorithms, such as [crumsort](https://github.com/scandum/crumsort), reinforce this idea. Although they perform substantial upfront analysis, that additional work can significantly improve the efficiency of the subsequent sorting.
 
 # Performance
 Benchmarks were run on an Intel i5-9600K.
@@ -24,29 +26,21 @@ Benchmarks were run on an Intel i5-9600K.
 
 These results reflect the intended trade-off: when a suitable structure is present, the analysis phase often pays off; when it is not, performance remains competitive with Go's standard library.
 
-# Novelty
-
-Both adaptive and hybrid sorting are long-established concepts. What is novel about StrategySort, however, is its treatment of explicit presort analysis as a primary design decision.
-
-Instead of indirectly inferring the structure during the sorting process, StrategySort deliberately performs up to O(n) steps before sorting in order to make data-driven strategy decisions. This design challenges the common assumption that such presort analysis is inherently wasteful and shows that it can be beneficial in practice for general sorting operations.
-
 # Timsort
 
-StrategySort is not the first algorithm to perform a prepass analysis on the input. Timsort, for example, performs such an analysis in order to:
+Timsort, for example, also performs such an analysis in order to:
 
 - identify monotonic runs,
 - reverse descending runs,
 - determine the order of merges.
 
-In this sense, the idea of paying O(n) in advance is not unique. However, this is where the designs differ:
+In this sense, the idea of paying O(n) in advance is not new. However, this is where the designs differ:
 
 Timsort
-- Always performs a merge-based stable sort
-- Uses the analysis only to optimize the execution of merges
+- Uses the analysis to optimize the execution of merges
 
 StrategySort
-- Chooses between fundamentally different sorting algorithms
-- Uses analysis to decide which algorithm to execute
+- Uses analysis to decide which fundamentally different sorting algorithm to execute
 
 Instead of optimizing a single algorithm, StrategySort treats sorting as a problem of strategy selection.
 
@@ -54,7 +48,7 @@ Instead of optimizing a single algorithm, StrategySort treats sorting as a probl
 
 Non-recursive implementation (manual stack instead of recursion) using stack-allocated buffers + one stack-allocated buffer to increase merge performance.
 
-The implementations are inspired by Peters’ Pattern-Defeating Quicksort, Peters’ TimSort, Yaroslavskiy’s Dual-Pivot Quicksort, and Astrelin’s GrailSort, as well as other hybrid adaptive sorting techniques. Credit is also due to Igor van den Hoven for his Conjoined Triple Reversal rotation, which is used in the mergesort implementation.
+The implementations are inspired by Peters’ Pattern-Defeating Quicksort, Peters’ Timsort, Yaroslavskiy’s Dual-Pivot Quicksort, and Astrelin’s GrailSort, as well as other hybrid adaptive sorting techniques. Credit is also due to Igor van den Hoven for his Conjoined Triple Reversal rotation, which is used in the mergesort implementation.
 
 # Memory
 
