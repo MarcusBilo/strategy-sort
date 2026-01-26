@@ -54,6 +54,6 @@ If in-place means that memory consumption does not scale with input size n, then
 
 # Credits
 
-[bertdobbelaere's SorterHunter / List of sorting networks optimized for the worst-case swap count](https://github.com/bertdobbelaere/SorterHunter)
+@bertdobbelaere [List of sorting networks optimized for the worst-case swap count](https://github.com/bertdobbelaere/SorterHunter)
 
-[Igor van den Hoven's Rotate / Conjoined Triple Reversal Rotation](https://github.com/scandum/rotate)
+@scandum [Conjoined Triple Reversal Rotation](https://github.com/scandum/rotate)
