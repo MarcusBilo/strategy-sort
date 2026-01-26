@@ -38,7 +38,7 @@ Timsort
 - Uses the analysis to optimize the execution of merges
 
 StrategySort
-- Uses analysis to decide which fundamentally different sorting algorithm to execute
+- Uses analysis to decide which sorting algorithm to execute
 
 Instead of optimizing a single algorithm, StrategySort treats sorting as a problem of strategy selection.
 
@@ -51,3 +51,9 @@ The implementations are inspired by Peters’ Pattern-Defeating Quicksort, Peter
 # Memory
 
 If in-place means that memory consumption does not scale with input size n, then StrategySort satisfies this definition. This is because it uses a fixed [512]int buffer for the quicksort stack, which corresponds to either 2048 B (32-bit) or 4096 B (64-bit), depending on the system architecture. The Mergesort implementation uses a fixed [192]int stack buffer (768 B or 1536 B) together with a [320]T buffer to speed up merging. The size of this generic buffer depends on T and ranges from 320 B (for int8, uint8) to 5120 B (for strings). While it would be possible to further reduce memory usage without sacrificing performance or functionality, this was not a primary design goal.
+
+# Credits
+
+[bertdobbelaere's SorterHunter / List of sorting networks optimized for the worst-case swap count](https://github.com/bertdobbelaere/SorterHunter)
+
+[Igor van den Hoven's Rotate / Conjoined Triple Reversal Rotation](https://github.com/scandum/rotate)
