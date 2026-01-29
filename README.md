@@ -11,6 +11,7 @@ Instead of relying on a single algorithm that works quite well in many scenarios
 At first glance, this may seem counterproductive. Most sorting algorithms deliberately avoid additional passes over the data unless absolutely necessary. However, StrategySort shows that this assumption is not always true: an explicit presort analysis phase can still lead to competitive, and in some cases, even superior performance.
 
 # Performance
+## Runtime (avg. of 10 runs)
 Benchmarks were run on an Intel i5-9600K.
 
 | Input Type                            | 1M integers        | 1K integers        |
@@ -22,7 +23,18 @@ Benchmarks were run on an Intel i5-9600K.
 | Nearly sorted (≥80%, global disorder) | up to ~10% slower  | roughly equal      |
 | Duplicate-heavy data                  | roughly equal      | roughly equal      |
 
-These results reflect the intended trade-off: when a suitable structure is present, the analysis phase often pays off; when it is not, performance remains competitive with Go's standard library.
+These results reflect the intended trade-off: when a suitable structure is present, the analysis phase pays off; when it is not, performance remains competitive with Go's standard library.
+
+## Numer of Comparisons (avg. of 10 runs)
+
+| Input Type                            | 1M integers        | 1K integers        |
+| ------------------------------------- | ------------------ | ------------------ |
+| Random data                           | ~26.9M             | ~14,732            |
+| Fully ascending                       | 999,999            | 999                |
+| Fully descending                      | 1,000,000          | 1,000              |
+| Nearly sorted (90%, local disorder)   | ~4.57M             | ~4,628             |
+| Nearly sorted (90%, global disorder)  | ~29.8M             | ~15,201            |
+| Duplicate-heavy data (1% unique)      | ~20.7M             | ~9,849             |
 
 # Timsort
 
