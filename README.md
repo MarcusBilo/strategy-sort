@@ -12,7 +12,7 @@ At first glance, this may seem counterproductive. Most sorting algorithms delibe
 
 # Performance
 ## Runtime (avg. of 10 runs)
-Benchmarks were run on an Intel i5-9600K.
+Benchmarks were run on an Intel i5-9600K. *main.go
 
 | Input Type                            | 1M integers        | 1K integers        |
 | ------------------------------------- | ------------------ | ------------------ |
@@ -25,7 +25,9 @@ Benchmarks were run on an Intel i5-9600K.
 
 These results reflect the intended trade-off: when a suitable structure is present, the analysis phase pays off; when it is not, performance remains competitive with Go's standard library.
 
-## Numer of Comparisons (avg. of 10 runs)
+## Number of Comparisons (avg. of 10 runs)
+
+*main_comparisons.go
 
 | Input Type                            | 1M integers        | 1K integers        |
 | ------------------------------------- | ------------------ | ------------------ |
